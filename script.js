@@ -11,29 +11,27 @@ pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
     document.getElementById('page-count').textContent = pdfDoc.numPages;
 
     // Render and add each page to flipbook
-    for (let num = 1; num <= pdfDoc.numPages; num++) {
-        renderPage(num).then(canvas => {
-            const pageDiv = document.createElement('div');
-            pageDiv.className = 'page';
-            pageDiv.appendChild(canvas);
-            document.getElementById('flipbook').appendChild(pageDiv);
-
-            // Initialize Turn.js after adding all pages
-            if (num === pdfDoc.numPages) {
-                $('#flipbook').turn({
-                    width: 800,
-                    height: 600,
-                    autoCenter: true
-                });
-            }
-        }).catch(err => {
-            console.error('Error rendering page:', err);
+    renderAllPages().then(() => {
+        // Initialize Turn.js after adding all pages
+        $('#flipbook').turn({
+            width: 800,
+            height: 600,
+            autoCenter: true
         });
-    }
+    });
 }).catch(err => {
     console.error('Error loading PDF:', err);
     document.getElementById('flipbook').textContent = 'No se pudo cargar el PDF. Por favor, verifica la ruta o el archivo.';
 });
+
+// Render all pages and add them to flipbook
+const renderAllPages = () => {
+    const renderPromises = [];
+    for (let num = 1; num <= pdfDoc.numPages; num++) {
+        renderPromises.push(renderPage(num));
+    }
+    return Promise.all(renderPromises);
+};
 
 // Render the page
 const renderPage = num => {
@@ -51,7 +49,12 @@ const renderPage = num => {
             };
 
             page.render(renderCtx).promise.then(() => {
-                resolve(canvas);
+                // Añadir la página al flipbook
+                const pageDiv = document.createElement('div');
+                pageDiv.className = 'page';
+                pageDiv.appendChild(canvas);
+                document.getElementById('flipbook').appendChild(pageDiv);
+                resolve();
             }).catch(err => {
                 console.error('Error rendering page:', err);
                 reject(err);
@@ -65,9 +68,13 @@ const renderPage = num => {
 
 // Button Events
 document.getElementById('prev-page').addEventListener('click', () => {
-    $('#flipbook').turn('previous');
+    if ($('#flipbook').data('turn')) {
+        $('#flipbook').turn('previous');
+    }
 });
 
 document.getElementById('next-page').addEventListener('click', () => {
-    $('#flipbook').turn('next');
+    if ($('#flipbook').data('turn')) {
+        $('#flipbook').turn('next');
+    }
 });
