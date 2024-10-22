@@ -8,8 +8,3 @@ $(document).ready(function () {
         arrows: false
     });
 });
-
-    $('#hospital-page').click(function() {
-        window.open('https://hospitalinfantil.org/', '_blank');
-    });
-});
