@@ -75,8 +75,8 @@ function renderPages() {
 
     // Inicializar Turn.js después de que se hayan agregado las páginas
     $('#flipbook').turn({
-        width: 800,
-        height: 500,
+        width: $('#flipbook').width(),  // Adaptable al contenedor
+        height: 500,  // Altura fija pero puedes ajustar esto para que sea dinámico
         autoCenter: true,
         display: 'double'
     });
