@@ -53,7 +53,9 @@ const renderPage = num => {
                 // Añadir la página al flipbook
                 const pageDiv = document.createElement('div');
                 pageDiv.className = 'page';
+                pageDiv.style.display = 'none'; // Ocultar página inicialmente
                 pageDiv.appendChild(canvas);
+                $('#flipbook').append(pageDiv);
                 $('#flipbook').turn('addPage', pageDiv, num);
                 resolve();
             }).catch(err => {
