@@ -1,6 +1,6 @@
 #mybook {
     width: 100vw; /* Ocupa el ancho completo del viewport */
-    height: 90vh; /* Ocupa el 90% del alto del viewport */
+    height: 100vh; /* Ocupa el 90% del alto del viewport */
 }
 
 #mybook img {
