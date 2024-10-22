@@ -1,9 +1,9 @@
-$(document).ready(function() {
-            $('#mybook').booklet({
-                width: 900,
-                height: 600,
-                autoCenter: true,
-                arrows: true,
-                pageNumbers: true
-            });
-        });
+$(function() {
+    $('#mybook').booklet({
+        width: 900,
+        height: 600,
+        autoCenter: true,
+        next: '#next',
+        prev: '#prev'
+    });
+});
