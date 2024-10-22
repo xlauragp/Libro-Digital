@@ -3,30 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Libro Interactivo</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Libro Digital</title>
+    <link href="src/jquery.booklet.latest.css" type="text/css" rel="stylesheet" />
+    <script src="src/jquery-2.1.0.min.js"></script>
+    <script src="src/jquery-ui-1.10.4.min.js"></script>
+    <script src="src/jquery.easing.1.3.js"></script>
+    <script src="src/jquery.booklet.latest.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<div id="book-container" class="container">
-    <h2>Portada del Libro</h2>
-    <div id="mybook">
-        <div><img src="paginas/img1.jpg" alt="Página 1"></div>
-        <div><img src="paginas/img2.jpg" alt="Página 2"></div>
-        <div><img src="paginas/img3.jpg" alt="Página 3"></div>
-        <div><img src="paginas/img4.jpg" alt="Página 4"></div>
-        <!-- Agrega hasta la imagen 65 -->
+    <div id="book-container">
+        <div id="mybook">
+            <!-- Páginas del libro -->
+            <div><img src="paginas/img1.jpg" alt="Página 1"></div>
+            <div><img src="paginas/img2.jpg" alt="Página 2"></div>
+            <div><img src="paginas/img3.jpg" alt="Página 3"></div>
+            <!-- Continúa con más imágenes... hasta la 65 -->
+        </div>
+        <a href="https://hospitalinfantil.org/" class="btn btn-hospital">Página del Hospital</a>
     </div>
 
-    <div class="text-center mt-4">
-        <a href="https://hospitalinfantil.org/" class="btn btn-hospital" target="_blank">Página del Hospital</a>
-    </div>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<script src="booklet/jquery.booklet.latest.min.js"></script>
-<script src="script.js"></script>
+    <script>
+        $(function() {
+            $('#mybook').booklet({
+                width: 900,
+                height: 600,
+                autoCenter: true,
+                arrows: true,
+                pageNumbers: true
+            });
+        });
+    </script>
 </body>
 </html>
