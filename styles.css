@@ -4,35 +4,28 @@ body {
 
 #book-container {
     margin: auto;
-    max-width: 800px;
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
+    max-width: 1000px;
 }
 
-#pdf-container {
-    width: 100%;
-    height: auto;
+#flipbook {
+    width: 800px;
+    height: 500px;
     margin: auto;
-    display: flex;
-    justify-content: center;
-    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-canvas {
-    width: 100%;
-    height: auto;
-    max-width: 48%;
+.page {
+    width: 400px;
+    height: 500px;
+    background: white;
     border: 1px solid #ccc;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
 
 button {
     padding: 10px 20px;
     font-size: 1rem;
-    width: 100%;
-    max-width: 200px;
-    margin: 10px;
 }
 
 #hospital-page {
@@ -44,8 +37,3 @@ button {
     background-color: #138496;
     color: white;
 }
-
-.btn-group, #hospital-page {
-    margin-bottom: 20px;
-}
-
