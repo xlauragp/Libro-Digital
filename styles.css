@@ -2,8 +2,13 @@ body {
     font-family: Arial, sans-serif;
 }
 
+#book-container {
+    margin: auto;
+    max-width: 800px;
+}
+
 #pdf-container {
-    width: 80%;
+    width: 100%;
     height: auto;
     margin: auto;
 }
@@ -27,4 +32,8 @@ button {
 #hospital-page:hover {
     background-color: #138496;
     color: white;
+}
+
+.btn-group, #hospital-page {
+    margin-bottom: 20px;
 }
