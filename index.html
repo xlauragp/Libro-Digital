@@ -4,30 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Libro Digital - Buena Alimentación para su Bebé</title>
-    <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
-<body class="bg-light">
-    <div class="container mt-5">
-        <div id="book-container" class="position-relative">
-            <div style="position:relative;padding-top:max(60%,324px);width:100%;height:0;">
-                <iframe style="position:absolute;border:none;width:100%;height:100%;left:0;top:0;" src="https://online.fliphtml5.com/lydbl/pnfg/" seamless="seamless" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true"></iframe>
-            </div>
+<body>
+    <div id="book-container" class="container text-center my-5">
+        <div id="flipbook">
+            <div class="hard">Portada del Libro</div>
+            <div class="hard"></div>
+            <div>Capítulo 1: Introducción</div>
+            <div>Capítulo 2: Alimentos Recomendados</div>
+            <div>Capítulo 3: Alimentación Balanceada</div>
+            <div>Capítulo 4: Consejos Útiles</div>
+            <div class="hard"></div>
+            <div class="hard">Contraportada</div>
         </div>
-
-        <div class="d-flex justify-content-center mt-4">
-            <button id="hospital-page" class="btn btn-info">Página del Hospital</button>
+        <div class="btn-group mt-4" role="group" aria-label="Navegación de páginas">
+            <button id="prev-page" class="btn btn-primary">Página Anterior</button>
+            <button id="next-page" class="btn btn-primary">Página Siguiente</button>
+        </div>
+        <div class="mt-3">
+            Página <span id="page-num">1</span> de <span id="page-count">...</span>
+        </div>
+        <div class="mt-4">
+            <button id="hospital-page" class="btn btn-hospital">Página del Hospital</button>
         </div>
     </div>
 
+    <script src="script.js"></script>
     <script>
         document.getElementById('hospital-page').addEventListener('click', () => {
             window.open('https://hospitalinfantil.org/', '_blank');
         });
     </script>
-
-    <!-- Bootstrap JS -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
