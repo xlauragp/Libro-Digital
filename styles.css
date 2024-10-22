@@ -78,7 +78,7 @@
     margin-top: 20px;
 }
 
-/* Ajustes para pantallas más pequeñas */
+/* Ajustes para tablet */
 @media (max-width: 768px) {
     #mybook {
         width: 100%;
@@ -90,3 +90,16 @@
         height: auto;
         object-fit: contain;
     }
+/* Ajustes para pantallas celular */
+@media (max-width: 480px) { /* Para celulares más comunes */
+    #mybook {
+        width: 100%;
+        height: auto;
+    }
+
+    #mybook img {
+        max-width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+}
