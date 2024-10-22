@@ -1,9 +1,10 @@
 $(function() {
     $('#mybook').booklet({
-        width: 900,
-        height: 600,
+        width: 800,
+        height: 500,
         autoCenter: true,
-        next: '#next',
-        prev: '#prev'
+        closed: true,
+        pagePadding: 0,
+        pageNumbers: true
     });
 });
