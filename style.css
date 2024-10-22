@@ -5,12 +5,17 @@ body {
     color: #333;
 }
 
-#pdf-render {
+#flipbook {
     margin: 40px auto;
-    width: 600px;
-    height: 800px;
+    width: 800px;
+    height: 600px;
     border: 1px solid #ccc;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.page {
+    width: 100%;
+    height: 100%;
 }
 
 button {
