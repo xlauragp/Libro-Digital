@@ -12,6 +12,7 @@ body {
     background-color: #ffffff;
     overflow: hidden;
     padding: 20px;
+    text-align: left;
 }
 
 .btn-info {
@@ -42,4 +43,12 @@ body {
 
 .btn-hospital:hover {
     background-color: #218838;
+}
+
+#mybook img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    margin: auto;
 }
