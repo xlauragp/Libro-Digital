@@ -12,22 +12,6 @@ body {
     background-color: #ffffff;
     overflow: hidden;
     padding: 20px;
-    text-align: left;
-}
-
-.btn-info {
-    background-color: #17a2b8;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.btn-info:hover {
-    background-color: #138496;
 }
 
 .btn-hospital {
@@ -43,12 +27,4 @@ body {
 
 .btn-hospital:hover {
     background-color: #218838;
-}
-
-#mybook img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    display: block;
-    margin: auto;
 }
