@@ -1,29 +1,23 @@
 const url = './libro.pdf';
-
 let pdfDoc = null,
-    currentPage = 1,
-    totalPages = 0;
+    pageNum = 1,
+    pageIsRendering = false,
+    pageNumIsPending = null;
 
 const scale = 1.5,
-      canvas = document.getElementById('pdf-render'),
-      ctx = canvas.getContext('2d');
+    canvas = document.querySelector('#pdf-render'),
+    ctx = canvas.getContext('2d');
 
-// Set the workerSrc for PDF.js
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js';
-
-// Get Document
+// Cargar el documento PDF
 pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
     pdfDoc = pdfDoc_;
-    totalPages = pdfDoc.numPages;
-    document.getElementById('page-count').textContent = totalPages;
-    renderPage(currentPage);
-}).catch(err => {
-    console.error('Error loading PDF:', err);
-    canvas.textContent = 'No se pudo cargar el PDF. Por favor, verifica la ruta o el archivo.';
+    document.querySelector('#page-count').textContent = pdfDoc.numPages;
+    renderPage(pageNum);
 });
 
-// Render the page
-const renderPage = num => {
+// Renderizar la página
+function renderPage(num) {
+    pageIsRendering = true;
     pdfDoc.getPage(num).then(page => {
         const viewport = page.getViewport({ scale });
         canvas.height = viewport.height;
@@ -35,26 +29,57 @@ const renderPage = num => {
         };
 
         page.render(renderCtx).promise.then(() => {
-            document.getElementById('page-num').textContent = num;
+            pageIsRendering = false;
+
+            if (pageNumIsPending !== null) {
+                renderPage(pageNumIsPending);
+                pageNumIsPending = null;
+            }
         });
-    }).catch(err => {
-        console.error('Error rendering page:', err);
+
+        document.querySelector('#page-num').textContent = num;
     });
-};
+}
 
-// Button Events
-document.getElementById('prev-page').addEventListener('click', () => {
-    if (currentPage <= 1) {
+// Colocar en cola la página para renderizar
+function queueRenderPage(num) {
+    if (pageIsRendering) {
+        pageNumIsPending = num;
+    } else {
+        renderPage(num);
+    }
+}
+
+// Mostrar página anterior
+function previousPage() {
+    if (pageNum <= 1) {
         return;
     }
-    currentPage--;
-    renderPage(currentPage);
-});
+    pageNum--;
+    queueRenderPage(pageNum);
+}
 
-document.getElementById('next-page').addEventListener('click', () => {
-    if (currentPage >= totalPages) {
+// Mostrar página siguiente
+function nextPage() {
+    if (pageNum >= pdfDoc.numPages) {
         return;
     }
-    currentPage++;
-    renderPage(currentPage);
+    pageNum++;
+    queueRenderPage(pageNum);
+}
+
+// Añadir manejadores de eventos para los botones de navegación
+document.getElementById('prev-page').addEventListener('click', previousPage);
+document.getElementById('next-page').addEventListener('click', nextPage);
+
+// Resaltar el texto seleccionado en la página
+document.addEventListener('mouseup', function () {
+    const selection = window.getSelection();
+    if (selection.toString().length > 0) {
+        const range = selection.getRangeAt(0);
+        const span = document.createElement('span');
+        span.style.backgroundColor = 'yellow';
+        span.appendChild(range.extractContents());
+        range.insertNode(span);
+    }
 });
