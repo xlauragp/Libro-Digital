@@ -12,25 +12,6 @@ body {
     overflow: hidden;
 }
 
-.btn-info {
-    background-color: #17a2b8;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.btn-info:hover {
-    background-color: #138496;
-}
-
-/* Button for hospital page */
 .btn-hospital {
     background-color: #28a745;
     border: none;
@@ -43,15 +24,8 @@ body {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 5px;
-    position: relative;
-    top: 20px;
 }
 
 .btn-hospital:hover {
     background-color: #218838;
-}
-
-/* Highlighted text style */
-.highlight {
-    background-color: yellow;
 }
