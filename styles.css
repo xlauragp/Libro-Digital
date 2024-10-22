@@ -69,41 +69,38 @@
     object-fit: cover;
 }
 
-.container {
-    max-width: 100%;
+/* Centrado en el contenedor */
+.container-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
 }
 
-.btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 10px;
-}
-
-
-/* Botón para pantallas pequeñas */
+/* Ajustes para pantallas más pequeñas */
 @media (max-width: 768px) {
     #mybook {
         width: 100%;
         height: auto;
     }
 
-    /* Botones más pequeños en pantallas pequeñas */
+    #mybook img {
+        max-width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+    /* Aseguramos que los botones sean accesibles */
     .btn-hospital, .btn-download {
-        font-size: 14px; /* Reduce el tamaño de la fuente */
-        padding: 8px 15px; /* Reduce el tamaño del padding */
+        font-size: 16px;
+        padding: 10px 20px;
+        width: 100%; /* Para hacer que ocupen todo el ancho */
+        max-width: 300px; /* Controlando el ancho máximo */
     }
-
-    /* Ajustar el contenedor en pantallas pequeñas */
-    .container {
-        margin-top: 10px; /* Reduce el margen superior */
-        padding: 0 10px;  /* Añade un padding lateral para que no quede pegado al borde */
-    }
-
-    /* Centrar los botones en pantallas pequeñas */
+    
     .container-center {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        margin-top: 15px;
     }
 }
 
