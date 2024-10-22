@@ -1,92 +1,109 @@
 const url = './libro.pdf';
 let pdfDoc = null,
-    pageNum = 1;
+    pageNum = 1,
+    pageIsRendering = false,
+    pageNumIsPending = null;
 
-const scale = 1.5;
+const scale = 1.5,
+    canvasLeft = document.querySelector('#pdf-render-left'),
+    canvasRight = document.querySelector('#pdf-render-right'),
+    ctxLeft = canvasLeft.getContext('2d'),
+    ctxRight = canvasRight.getContext('2d');
 
 // Cargar el documento PDF
 pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
     pdfDoc = pdfDoc_;
     document.querySelector('#page-count').textContent = pdfDoc.numPages;
-
-    // Renderizar la portada
-    renderCoverPage();
-    // Renderizar las páginas del libro en el flipbook
-    renderPages();
+    renderPage(pageNum);
 });
 
-// Renderizar la portada (primera página)
-function renderCoverPage() {
-    pdfDoc.getPage(1).then(page => {
-        const viewport = page.getViewport({ scale });
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
+// Renderizar las páginas
+function renderPage(num) {
+    pageIsRendering = true;
 
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
+    // Renderizar página izquierda
+    pdfDoc.getPage(num).then(page => {
+        const viewport = page.getViewport({ scale });
+        canvasLeft.height = viewport.height;
+        canvasLeft.width = viewport.width;
 
         const renderCtx = {
-            canvasContext: ctx,
-            viewport: viewport
+            canvasContext: ctxLeft,
+            viewport
         };
 
         page.render(renderCtx).promise.then(() => {
-            const coverDiv = document.createElement('div');
-            coverDiv.classList.add('page');
-            coverDiv.appendChild(canvas);
-            document.querySelector('#flipbook').appendChild(coverDiv);
+            pageIsRendering = false;
+
+            if (pageNumIsPending !== null) {
+                renderPage(pageNumIsPending);
+                pageNumIsPending = null;
+            }
         });
     });
-}
 
-// Renderizar las páginas del libro (dos páginas a la vez)
-function renderPages() {
-    for (let i = 2; i <= pdfDoc.numPages; i += 2) {
-        const pagePromises = [pdfDoc.getPage(i)];
-        if (i + 1 <= pdfDoc.numPages) {
-            pagePromises.push(pdfDoc.getPage(i + 1));
-        }
+    // Renderizar página derecha (solo si no es la última página)
+    if (num + 1 <= pdfDoc.numPages) {
+        pdfDoc.getPage(num + 1).then(page => {
+            const viewport = page.getViewport({ scale });
+            canvasRight.height = viewport.height;
+            canvasRight.width = viewport.width;
 
-        Promise.all(pagePromises).then(pages => {
-            const pagesDiv = document.createElement('div');
-            pagesDiv.classList.add('page');
+            const renderCtx = {
+                canvasContext: ctxRight,
+                viewport
+            };
 
-            pages.forEach(page => {
-                const viewport = page.getViewport({ scale });
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-
-                canvas.width = viewport.width;
-                canvas.height = viewport.height;
-
-                const renderCtx = {
-                    canvasContext: ctx,
-                    viewport: viewport
-                };
-
-                page.render(renderCtx).promise.then(() => {
-                    pagesDiv.appendChild(canvas);
-                });
-            });
-
-            document.querySelector('#flipbook').appendChild(pagesDiv);
+            page.render(renderCtx);
         });
+    } else {
+        // Limpiar el canvas derecho si no hay página siguiente
+        ctxRight.clearRect(0, 0, canvasRight.width, canvasRight.height);
     }
 
-    // Inicializar Turn.js después de que se hayan agregado las páginas
-    $('#flipbook').turn({
-        width: $('#flipbook').width(),  // Adaptable al contenedor
-        height: 500,  // Altura fija pero puedes ajustar esto para que sea dinámico
-        autoCenter: true,
-        display: 'double'
-    });
+    document.querySelector('#page-num').textContent = num;
 }
 
-// Manejar la navegación entre páginas
-document.getElementById('prev-page').addEventListener('click', () => {
-    $('#flipbook').turn('previous');
-});
+// Colocar en cola la página para renderizar
+function queueRenderPage(num) {
+    if (pageIsRendering) {
+        pageNumIsPending = num;
+    } else {
+        renderPage(num);
+    }
+}
 
-document.getElementById('next-page').addEventListener('click', () => {
-    $('#flipbook').turn('next');
+// Mostrar página anterior
+function previousPage() {
+    if (pageNum <= 1) {
+        return;
+    }
+    pageNum -= 2;
+    if (pageNum < 1) pageNum = 1;
+    queueRenderPage(pageNum);
+}
+
+// Mostrar página siguiente
+function nextPage() {
+    if (pageNum + 1 >= pdfDoc.numPages) {
+        return;
+    }
+    pageNum += 2;
+    queueRenderPage(pageNum);
+}
+
+// Añadir manejadores de eventos para los botones de navegación
+document.getElementById('prev-page').addEventListener('click', previousPage);
+document.getElementById('next-page').addEventListener('click', nextPage);
+
+// Resaltar el texto seleccionado en la página
+document.addEventListener('mouseup', function () {
+    const selection = window.getSelection();
+    if (selection.toString().length > 0) {
+        const range = selection.getRangeAt(0);
+        const span = document.createElement('span');
+        span.style.backgroundColor = 'yellow';
+        span.appendChild(range.extractContents());
+        range.insertNode(span);
+    }
 });
