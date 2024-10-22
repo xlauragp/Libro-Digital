@@ -22,18 +22,15 @@
         <div class="btn-group" role="group" aria-label="Navegación de páginas">
             <button id="prev-page" class="btn btn-primary">Página Anterior</button>
             <button id="next-page" class="btn btn-primary">Página Siguiente</button>
-            <button id="hospital-page" class="btn btn-secondary">Página del Hospital</button>
         </div>
         <div class="mt-3">
             Página <span id="page-num">1</span> de <span id="page-count">...</span>
         </div>
+        <div class="mt-4">
+            <button id="hospital-page" class="btn btn-info" onclick="window.open('https://hospitalinfantil.org/', '_blank')">Página del Hospital</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
-    <script>
-        document.getElementById('hospital-page').addEventListener('click', () => {
-            window.location.href = 'https://hospitalinfantil.org/';
-        });
-    </script>
 </body>
 </html>
