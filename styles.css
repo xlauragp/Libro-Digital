@@ -38,4 +38,9 @@ button:hover {
 
 #hospital-page:hover {
     background-color: #138496;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.btn-group, #hospital-page {
+    margin-bottom: 20px;
 }
