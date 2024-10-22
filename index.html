@@ -1,19 +1,18 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Libro Digital - Buena Alimentación para su Bebé</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
 </head>
 <body>
-    <div id="pdf-render"></div>
+    <div id="pdf-render">Cargando PDF, por favor espera...</div>
 
     <button id="prev-page">Página Anterior</button>
     <button id="next-page">Página Siguiente</button>
     <div>
-        Página <span id="page-num"></span> de <span id="page-count"></span>
+        Página <span id="page-num">1</span> de <span id="page-count">...</span>
     </div>
 
     <script src="script.js"></script>
