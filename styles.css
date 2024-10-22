@@ -20,21 +20,46 @@
     background-color: #218838;
 }
 
-/* Estilos para el botón de descarga del PDF */
-.btn-download {
-    background-color: #007bff;
-    border: none;
+/* Botón del hospital */
+.btn-hospital {
+    background: linear-gradient(90deg, #28a745, #218838);
     color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    text-decoration: none;
-    cursor: pointer;
-    margin: 20px;
-    border-radius: 5px;
+    border: none;
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-hospital:hover {
+    background: linear-gradient(90deg, #218838, #1e7e34);
+    transform: scale(1.05);
+}
+
+/* Botón para descargar PDF */
+.btn-download {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .btn-download:hover {
-    background-color: #0056b3;
+    background: linear-gradient(90deg, #0056b3, #004085);
+    transform: scale(1.05);
+}
+
+/* Centrado en el contenedor */
+.container-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 }
 
 /* Asegura que las imágenes se ajusten al tamaño del contenedor */
