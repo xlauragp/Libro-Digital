@@ -1,40 +1,22 @@
 $(document).ready(function() {
-    $("#flipbook").turn({
+    // Inicializar el Booklet
+    $('#mybook').booklet({
         width: 800,
         height: 600,
         autoCenter: true,
-        display: 'double',
-        elevation: 50,
-        gradients: true,
-        when: {
-            turned: function(e, page) {
-                $("#page-num").text(page);
-            }
-        }
+        speed: 600,
+        direction: 'LTR',
+        pagePadding: 10,
+        pageNumbers: true,
+        chapterSelector: true,
+        shadows: true,
+        shadowTopFwdWidth: 80,
+        shadowTopBackWidth: 80,
+        shadowBtmWidth: 80,
     });
 
-    // Total page count
-    $("#page-count").text($("#flipbook").turn("pages"));
-
-    // Previous page button
-    $("#prev-page").click(function() {
-        $("#flipbook").turn("previous");
-    });
-
-    // Next page button
-    $("#next-page").click(function() {
-        $("#flipbook").turn("next");
-    });
-
-    // Highlighting feature
-    $(document).mouseup(function() {
-        var selection = window.getSelection();
-        if (selection.toString().length > 0) {
-            var range = selection.getRangeAt(0);
-            var span = document.createElement("span");
-            span.className = "highlight";
-            span.appendChild(range.extractContents());
-            range.insertNode(span);
-        }
+    // Botón para abrir página del hospital en una nueva ventana
+    document.getElementById('hospital-page').addEventListener('click', () => {
+        window.open('https://hospitalinfantil.org/', '_blank');
     });
 });
