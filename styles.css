@@ -81,13 +81,13 @@
 
 /* Estilos del selector de capítulos */
 .chapter-select {
-    border: 2px solid #28a745;
+    border: 2px solid #336699;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s ease;
 }
 
 .chapter-select:focus {
-    border-color: #336699;
+    border-color: #363399;
 }
 
 /* Estilos de los botones */
