@@ -14,20 +14,22 @@
 </head>
 <body class="bg-light">
     <div class="container mt-5">
-        <div id="pdf-container" class="d-flex justify-content-center mb-4">
-            <canvas id="pdf-render" class="border"></canvas>
+        <div id="book-container" class="bg-white p-4 rounded shadow-lg">
+            <div id="pdf-container" class="d-flex justify-content-center mb-4">
+                <canvas id="pdf-render" class="border"></canvas>
+            </div>
+
+            <div class="d-flex justify-content-center mb-3">
+                <button id="prev-page" class="btn btn-primary mx-2">Página Anterior</button>
+                <button id="next-page" class="btn btn-primary mx-2">Página Siguiente</button>
+            </div>
+            
+            <div class="text-center mb-3">
+                Página <span id="page-num">1</span> de <span id="page-count">...</span>
+            </div>
         </div>
 
-        <div class="d-flex justify-content-center mb-3">
-            <button id="prev-page" class="btn btn-primary mx-2">Página Anterior</button>
-            <button id="next-page" class="btn btn-primary mx-2">Página Siguiente</button>
-        </div>
-        
-        <div class="text-center mb-3">
-            Página <span id="page-num">1</span> de <span id="page-count">...</span>
-        </div>
-
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center mt-4">
             <button id="hospital-page" class="btn btn-info">Página del Hospital</button>
         </div>
     </div>
