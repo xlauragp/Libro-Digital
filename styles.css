@@ -1,8 +1,10 @@
 /* Estilos para que todas las imágenes tengan un tamaño uniforme */
 #mybook img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain; /* Mantener la proporción de las imágenes */
+    width: auto; /* Cambiar a 'auto' para que el navegador ajuste el ancho */
+    height: auto; /* Mantener la proporción correcta */
+    max-width: 100%; /* Limitar el ancho máximo */
+    max-height: 100%; /* Limitar el alto máximo */
+    object-fit: cover; /* Asegurar que cubra todo el contenedor */
 }
 
 .btn-hospital {
