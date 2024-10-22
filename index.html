@@ -8,9 +8,22 @@
     <link href="styles.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container-center">
+    <!-- Selector de capítulos -->
+    <div class="container text-center mt-5">
+        <label for="chapter-select">Seleccionar Capítulo:</label>
+        <select id="chapter-select" class="form-control">
+            <option value="8">Capítulo I: Su bebé nuevo</option>
+            <option value="13">Capítulo II: Alimentación de pecho</option>
+            <option value="22">Capítulo III: Buena nutrición para la mamá lactante</option>
+            <option value="27">Capítulo IV: Alimentación con biberón</option>
+            <option value="34">Capítulo V: Alimentación y ablactación</option>
+            <option value="52">Capítulo VI: Comida hecha en casa</option>
+            <option value="58">Capítulo VII: Cuidados especiales</option>
+        </select>
+    </div>
+
+    <div class="container text-center mt-5">
         <div id="mybook">
-                <!-- Añade aquí cada una de las imágenes de las páginas del libro -->
             <div><img src="paginas/img1.jpg" alt="Página 1"></div>
             <div><img src="paginas/img2.jpg" alt="Página 2"></div>
             <div><img src="paginas/img3.jpg" alt="Página 3"></div>
@@ -78,7 +91,7 @@
             <div><img src="paginas/img65.jpg" alt="Página 65"></div>
         </div>
     </div>
- 
+    
     <div class="container-center">
         <button class="btn-hospital" onclick="window.open('https://hospitalinfantil.org', '_blank')">Página del Hospital</button>
     </div>
@@ -87,15 +100,6 @@
         <a href="libro.pdf" class="btn-download" download>Descargar PDF del Libro</a>
     </div>
 
-    <script src="booklet/src/jquery-2.1.0.min.js"></script>
-    <script src="booklet/src/jquery-ui-1.10.4.min.js"></script>
-    <script src="booklet/src/jquery.easing.1.3.js"></script>
-    <script src="booklet/src/jquery.booklet.latest.min.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
-
-    
     <script src="booklet/src/jquery-2.1.0.min.js"></script>
     <script src="booklet/src/jquery-ui-1.10.4.min.js"></script>
     <script src="booklet/src/jquery.easing.1.3.js"></script>
