@@ -33,10 +33,14 @@ const renderPage = num => {
                 renderPage(pageNumIsPending);
                 pageNumIsPending = null;
             }
+        }).catch(err => {
+            console.error('Error rendering page:', err);
         });
 
         // Output current page
         document.getElementById('page-num').textContent = num;
+    }).catch(err => {
+        console.error('Error getting page:', err);
     });
 };
 
@@ -73,6 +77,9 @@ pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
     document.getElementById('page-count').textContent = pdfDoc.numPages;
 
     renderPage(pageNum);
+}).catch(err => {
+    console.error('Error loading PDF:', err);
+    document.getElementById('pdf-render').textContent = 'No se pudo cargar el PDF. Por favor, verifica la ruta o el archivo.';
 });
 
 // Button Events
