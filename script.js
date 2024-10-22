@@ -9,6 +9,11 @@ const scale = 1.5;
 // Set the workerSrc for PDF.js
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js';
 
+// Ensure Turn.js is loaded
+if (typeof $.fn.turn === 'undefined') {
+    console.error('Turn.js is not loaded properly. Please check the URL or script loading order.');
+}
+
 // Get Document
 pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
     pdfDoc = pdfDoc_;
@@ -33,7 +38,9 @@ pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
 // Render the pages
 const renderPages = num => {
     // Clear the flipbook before adding new pages
-    $('#flipbook').turn('destroy');
+    if ($('#flipbook').data('turn')) {
+        $('#flipbook').turn('destroy');
+    }
     $('#flipbook').html('');
     $('#flipbook').turn({
         width: 800,
