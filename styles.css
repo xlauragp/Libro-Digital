@@ -36,3 +36,29 @@
 .btn-download:hover {
     background-color: #0056b3;
 }
+
+/* Asegura que las imágenes se ajusten al tamaño del contenedor */
+#mybook img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.container {
+    max-width: 100%;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+}
+
+@media (max-width: 768px) {
+    /* Estilos para pantallas más pequeñas */
+    .btn {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+}
+
