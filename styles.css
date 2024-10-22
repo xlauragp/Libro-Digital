@@ -30,3 +30,14 @@ button {
 button:hover {
     background-color: #005f6b;
 }
+
+.btn-info {
+    background-color: #17a2b8;
+    border: none;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-info:hover {
+    background-color: #138496;
+}
