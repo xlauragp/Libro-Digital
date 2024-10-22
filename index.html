@@ -26,10 +26,15 @@
             Página <span id="page-num">1</span> de <span id="page-count">...</span>
         </div>
         <div class="mt-4">
-            <button id="hospital-page" class="btn btn-info" onclick="window.open('https://hospitalinfantil.org/', '_blank')">Página del Hospital</button>
+            <button id="hospital-page" class="btn btn-info">Página del Hospital</button>
         </div>
     </div>
 
     <script src="script.js"></script>
+    <script>
+        document.getElementById('hospital-page').addEventListener('click', () => {
+            window.open('https://hospitalinfantil.org/', '_blank');
+        });
+    </script>
 </body>
 </html>
