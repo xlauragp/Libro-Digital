@@ -6,21 +6,24 @@ let pdfDoc = null,
 
 const scale = 1.5;
 
+// Set the workerSrc for PDF.js
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js';
+
 // Get Document
 pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
     pdfDoc = pdfDoc_;
     totalPages = pdfDoc.numPages;
     document.getElementById('page-count').textContent = totalPages;
 
-    // Initialize Turn.js with enough pages to handle two at a time
+    // Initialize Turn.js with two pages visible
     $('#flipbook').turn({
         width: 800,
         height: 600,
         autoCenter: true,
-        pages: totalPages
+        display: 'double'
     });
 
-    // Render the first two pages
+    // Render the first page (cover)
     renderPages(currentPage);
 }).catch(err => {
     console.error('Error loading PDF:', err);
@@ -30,15 +33,13 @@ pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
 // Render the pages
 const renderPages = num => {
     // Clear the flipbook before adding new pages
-    $('#flipbook').turn('pages', totalPages);
-    $('#flipbook').turn('page', num);
     $('#flipbook').turn('destroy');
     $('#flipbook').html('');
     $('#flipbook').turn({
         width: 800,
         height: 600,
         autoCenter: true,
-        pages: totalPages
+        display: 'double'
     });
 
     // Add two pages at a time (current and next)
@@ -73,19 +74,15 @@ const renderPages = num => {
 
 // Button Events
 document.getElementById('prev-page').addEventListener('click', () => {
-    if (currentPage > 2) {
+    if (currentPage > 1) {
         currentPage -= 2;
-        renderPages(currentPage);
-        document.getElementById('page-num').textContent = currentPage;
-    } else if (currentPage === 2) {
-        currentPage = 1;
         renderPages(currentPage);
         document.getElementById('page-num').textContent = currentPage;
     }
 });
 
 document.getElementById('next-page').addEventListener('click', () => {
-    if (currentPage < totalPages - 1) {
+    if (currentPage < totalPages) {
         currentPage += 2;
         renderPages(currentPage);
         document.getElementById('page-num').textContent = currentPage;
