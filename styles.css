@@ -60,14 +60,14 @@
     transform: scale(1.05);
 }
 
-/* Centrado en el contenedor */
+/* Centrado en el contenedor 
 .container-center {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     margin-top: 20px;
-}
+}*/
 
 /* Estilos del selector de capítulos */
 .chapter-select {
@@ -78,14 +78,6 @@
 
 .chapter-select:focus {
     border-color: #218838;
-}
-
-/* Centrado en el contenedor */
-.container-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
 }
 
 /* Estilos de los botones */
