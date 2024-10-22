@@ -95,8 +95,6 @@
     .btn-hospital, .btn-download {
         font-size: 16px;
         padding: 10px 20px;
-        width: 100%; /* Para hacer que ocupen todo el ancho */
-        max-width: 300px; /* Controlando el ancho máximo */
     }
     
     .container-center {
