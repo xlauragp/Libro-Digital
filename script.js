@@ -1,6 +1,6 @@
 $(function() {
     $('#mybook').booklet({
-        width: '100%',
+        width: 800,
         height: 600,
         auto: false,
         closed: true,
@@ -8,4 +8,3 @@ $(function() {
         pagePadding: 10
     });
 });
-
