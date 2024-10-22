@@ -79,6 +79,7 @@
     margin: 10px;
 }
 
+
 /* Media query para pantallas más pequeñas */
 @media (max-width: 768px) {
     #mybook {
