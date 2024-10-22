@@ -4,7 +4,7 @@
     height: auto; /* Mantener la proporción correcta */
     max-width: 100%; /* Limitar el ancho máximo */
     max-height: 100%; /* Limitar el alto máximo */
-    object-fit: cover; /* Asegurar que cubra todo el contenedor */
+    object-fit: contain; /* Mantener la proporción de las imágenes */
 }
 
 .btn-hospital {
