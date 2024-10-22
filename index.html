@@ -9,28 +9,43 @@
     <link rel="stylesheet" href="styles.css">
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- PDF.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
     <!-- Turn.js -->
-    <script src="turn.min.js"></script>
+    <script src="http://www.turnjs.com/lib/turn.min.js"></script>
+    <!-- Zoom.js -->
+    <script src="http://www.turnjs.com/lib/zoom.min.js"></script>
+    <!-- Highlight.js (for highlighting functionality) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
+    <style>
+        #flipbook {
+            width: 800px;
+            height: 600px;
+            margin: auto;
+        }
+        .page {
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        #highlight-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body class="bg-light">
     <div class="container mt-5">
-        <div id="book-container" class="bg-white p-4 rounded shadow-lg">
+        <div id="book-container" class="position-relative">
             <div id="flipbook" class="d-flex flex-wrap justify-content-center mb-4">
                 <div class="hard">Portada</div>
-                <div class="page" id="pdf-render-left"></div>
-                <div class="page" id="pdf-render-right"></div>
+                <div class="page"><img src="paginas/img1.jpg" alt="Página 1"></div>
+                <div class="page"><img src="paginas/img2.jpg" alt="Página 2"></div>
+                <div class="page"><img src="paginas/img3.jpg" alt="Página 3"></div>
+                <div class="page"><img src="paginas/img4.jpg" alt="Página 4"></div>
+                <!-- Continúa con todas las imágenes necesarias -->
             </div>
-
-            <div class="d-flex justify-content-center mb-3">
-                <button id="prev-page" class="btn btn-primary mx-2">Página Anterior</button>
-                <button id="next-page" class="btn btn-primary mx-2">Página Siguiente</button>
-            </div>
-            
-            <div class="text-center mb-3">
-                Página <span id="page-num">1</span> de <span id="page-count">...</span>
-            </div>
+            <canvas id="highlight-canvas"></canvas>
         </div>
 
         <div class="d-flex justify-content-center mt-4">
@@ -38,11 +53,46 @@
         </div>
     </div>
 
-    <!-- Script for PDF.js -->
-    <script src="script.js"></script>
+    <!-- Script para Turn.js -->
     <script>
+        $(document).ready(function() {
+            $('#flipbook').turn({
+                width: 800,
+                height: 600,
+                autoCenter: true,
+                display: 'double',
+                elevation: 50,
+                gradients: true,
+                when: {
+                    turned: function(e, page) {
+                        console.log('Current view: ', $(this).turn('view'));
+                    }
+                }
+            });
+        });
+
         document.getElementById('hospital-page').addEventListener('click', () => {
             window.open('https://hospitalinfantil.org/', '_blank');
+        });
+    </script>
+
+    <!-- Script para el resaltado -->
+    <script>
+        const canvas = new fabric.Canvas('highlight-canvas', {
+            isDrawingMode: true,
+            backgroundColor: 'rgba(0,0,0,0)',
+        });
+
+        canvas.setHeight(document.getElementById('flipbook').clientHeight);
+        canvas.setWidth(document.getElementById('flipbook').clientWidth);
+
+        canvas.freeDrawingBrush.width = 5;
+        canvas.freeDrawingBrush.color = 'yellow';
+
+        // Redimensionar el canvas cuando se cambia el tamaño del libro
+        $(window).resize(function() {
+            canvas.setHeight(document.getElementById('flipbook').clientHeight);
+            canvas.setWidth(document.getElementById('flipbook').clientWidth);
         });
     </script>
 
