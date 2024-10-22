@@ -19,3 +19,20 @@
 .btn-hospital:hover {
     background-color: #218838;
 }
+
+/* Estilos para el botón de descarga del PDF */
+.btn-download {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+.btn-download:hover {
+    background-color: #0056b3;
+}
