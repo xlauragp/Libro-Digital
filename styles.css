@@ -2,22 +2,7 @@
 #mybook img {
     max-width: 100%;
     max-height: 100%;
-    object-fit: contain; /* Mantener la proporción de las imágenes */
-}
-
-.btn-hospital {
-    background-color: #28a745;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin: 20px;
-    border-radius: 5px;
-}
-
-.btn-hospital:hover {
-    background-color: #218838;
+    object-fit: contain;
 }
 
 /* Botón del hospital */
@@ -86,4 +71,3 @@
         padding: 8px 15px;
     }
 }
-
