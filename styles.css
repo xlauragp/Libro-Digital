@@ -5,16 +5,24 @@ body {
 #book-container {
     margin: auto;
     max-width: 800px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 #pdf-container {
     width: 100%;
     height: auto;
     margin: auto;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
 }
 
 canvas {
     width: 100%;
+    height: auto;
+    max-width: 100%;
     border: 1px solid #ccc;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -22,6 +30,9 @@ canvas {
 button {
     padding: 10px 20px;
     font-size: 1rem;
+    width: 100%;
+    max-width: 200px;
+    margin: 10px;
 }
 
 #hospital-page {
