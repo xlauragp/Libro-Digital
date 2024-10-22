@@ -1,7 +1,9 @@
 #mybook {
-    width: 100vw; /* Ocupa el ancho completo del viewport */
-    height: 100vh; /* Ocupa el 90% del alto del viewport */
+    width: 100%;
+    height: auto;
+    max-height: 90vh; /* Limita el alto al 90% de la pantalla, pero permite que se ajuste */
 }
+
 
 #mybook img {
     width: 100%;
