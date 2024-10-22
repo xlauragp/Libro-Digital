@@ -1,22 +1,12 @@
-$(document).ready(function() {
-    // Inicializar el Booklet
+$(function() {
     $('#mybook').booklet({
-        width: 800,
-        height: 600,
-        autoCenter: true,
-        speed: 600,
-        direction: 'LTR',
-        pagePadding: 10,
-        pageNumbers: true,
-        chapterSelector: true,
-        shadows: true,
-        shadowTopFwdWidth: 80,
-        shadowTopBackWidth: 80,
-        shadowBtmWidth: 80,
+        width: 500,
+        height: 400,
+        auto: false,
+        pageNumbers: true
     });
 
-    // Botón para abrir página del hospital en una nueva ventana
-    document.getElementById('hospital-page').addEventListener('click', () => {
+    $('#hospital-page').click(function() {
         window.open('https://hospitalinfantil.org/', '_blank');
     });
 });
