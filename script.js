@@ -1,9 +1,7 @@
 const url = './libro.pdf';
 
 let pdfDoc = null,
-    pageNum = 1,
-    pageIsRendering = false,
-    pageNumIsPending = null;
+    pageNum = 1;
 
 const scale = 1.5;
 
@@ -12,20 +10,26 @@ pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
     pdfDoc = pdfDoc_;
     document.getElementById('page-count').textContent = pdfDoc.numPages;
 
-    // Render each page
-    const renderPromises = [];
+    // Render and add each page to flipbook
     for (let num = 1; num <= pdfDoc.numPages; num++) {
-        renderPromises.push(renderPage(num));
-    }
+        renderPage(num).then(canvas => {
+            const pageDiv = document.createElement('div');
+            pageDiv.className = 'page';
+            pageDiv.appendChild(canvas);
+            document.getElementById('flipbook').appendChild(pageDiv);
 
-    // Wait for all pages to be rendered before initializing Turn.js
-    Promise.all(renderPromises).then(() => {
-        $('#flipbook').turn({
-            width: 800,
-            height: 600,
-            autoCenter: true
+            // Initialize Turn.js after adding all pages
+            if (num === pdfDoc.numPages) {
+                $('#flipbook').turn({
+                    width: 800,
+                    height: 600,
+                    autoCenter: true
+                });
+            }
+        }).catch(err => {
+            console.error('Error rendering page:', err);
         });
-    });
+    }
 }).catch(err => {
     console.error('Error loading PDF:', err);
     document.getElementById('flipbook').textContent = 'No se pudo cargar el PDF. Por favor, verifica la ruta o el archivo.';
@@ -47,12 +51,7 @@ const renderPage = num => {
             };
 
             page.render(renderCtx).promise.then(() => {
-                // Añadir la página al flipbook
-                const pageDiv = document.createElement('div');
-                pageDiv.className = 'page';
-                pageDiv.appendChild(canvas);
-                document.getElementById('flipbook').appendChild(pageDiv);
-                resolve();
+                resolve(canvas);
             }).catch(err => {
                 console.error('Error rendering page:', err);
                 reject(err);
