@@ -4,94 +4,57 @@ let pdfDoc = null,
     currentPage = 1,
     totalPages = 0;
 
-const scale = 1.5;
+const scale = 1.5,
+      canvas = document.getElementById('pdf-render'),
+      ctx = canvas.getContext('2d');
 
 // Set the workerSrc for PDF.js
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js';
-
-// Ensure Turn.js is loaded
-if (typeof $.fn.turn === 'undefined') {
-    console.error('Turn.js is not loaded properly. Please check the URL or script loading order.');
-}
 
 // Get Document
 pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
     pdfDoc = pdfDoc_;
     totalPages = pdfDoc.numPages;
     document.getElementById('page-count').textContent = totalPages;
-
-    // Initialize Turn.js with two pages visible
-    $('#flipbook').turn({
-        width: 800,
-        height: 600,
-        autoCenter: true,
-        display: 'double'
-    });
-
-    // Render the first two pages (cover and next)
-    renderPages(currentPage);
+    renderPage(currentPage);
 }).catch(err => {
     console.error('Error loading PDF:', err);
-    document.getElementById('flipbook').textContent = 'No se pudo cargar el PDF. Por favor, verifica la ruta o el archivo.';
+    canvas.textContent = 'No se pudo cargar el PDF. Por favor, verifica la ruta o el archivo.';
 });
 
-// Render the pages
-const renderPages = num => {
-    // Clear the flipbook before adding new pages
-    if ($('#flipbook').data('turn')) {
-        $('#flipbook').turn('destroy');
-    }
-    $('#flipbook').html('');
-    $('#flipbook').turn({
-        width: 800,
-        height: 600,
-        autoCenter: true,
-        display: 'double'
-    });
+// Render the page
+const renderPage = num => {
+    pdfDoc.getPage(num).then(page => {
+        const viewport = page.getViewport({ scale });
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
 
-    // Add two pages at a time (current and next)
-    for (let i = 0; i < 2 && num + i <= totalPages; i++) {
-        pdfDoc.getPage(num + i).then(page => {
-            const viewport = page.getViewport({ scale });
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = viewport.width;
-            canvas.height = viewport.height;
+        const renderCtx = {
+            canvasContext: ctx,
+            viewport
+        };
 
-            const renderCtx = {
-                canvasContext: ctx,
-                viewport
-            };
-
-            page.render(renderCtx).promise.then(() => {
-                // Añadir la página al flipbook
-                const pageDiv = document.createElement('div');
-                pageDiv.className = 'page';
-                pageDiv.appendChild(canvas);
-
-                $('#flipbook').turn('addPage', pageDiv);
-            }).catch(err => {
-                console.error('Error rendering page:', err);
-            });
-        }).catch(err => {
-            console.error('Error getting page:', err);
+        page.render(renderCtx).promise.then(() => {
+            document.getElementById('page-num').textContent = num;
         });
-    }
+    }).catch(err => {
+        console.error('Error rendering page:', err);
+    });
 };
 
 // Button Events
 document.getElementById('prev-page').addEventListener('click', () => {
-    if (currentPage > 1) {
-        currentPage -= 2;
-        renderPages(currentPage);
-        document.getElementById('page-num').textContent = currentPage;
+    if (currentPage <= 1) {
+        return;
     }
+    currentPage--;
+    renderPage(currentPage);
 });
 
 document.getElementById('next-page').addEventListener('click', () => {
-    if (currentPage < totalPages) {
-        currentPage += 2;
-        renderPages(currentPage);
-        document.getElementById('page-num').textContent = currentPage;
+    if (currentPage >= totalPages) {
+        return;
     }
+    currentPage++;
+    renderPage(currentPage);
 });
