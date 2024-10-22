@@ -3,27 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Libro Digital - Buena Alimentación para su Bebé</title>
     <link rel="stylesheet" href="booklet/jquery.booklet.latest.css">
     <link rel="stylesheet" href="styles.css">
+    <title>Libro Digital</title>
 </head>
 <body>
-    <div id="book-container">
-        <div id="mybook">
-            <div>Portada del Libro</div>
-            <div>Capítulo 1: Introducción</div>
-            <div>Capítulo 2: Alimentos Recomendados</div>
-            <div>Capítulo 3: Alimentación Balanceada</div>
-            <div>Capítulo 4: Consejos Útiles</div>
-            <div>Contraportada</div>
-        </div>
-    </div>
-    <button id="hospital-page" class="btn btn-hospital">Página del Hospital</button>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-    <script src="booklet/jquery.easing.1.3.js"></script>
-    <script src="booklet/jquery.booklet.latest.min.js"></script>
-    <script src="script.js"></script>
+<div id="book-container">
+    <div id="mybook">
+        <!-- Incluye cada una de las imágenes como una página del libro -->
+        <div><img src="paginas/img1.jpg" alt="Página 1"></div>
+        <div><img src="paginas/img2.jpg" alt="Página 2"></div>
+        <div><img src="paginas/img3.jpg" alt="Página 3"></div>
+        <!-- Añade más páginas según lo necesites -->
+    </div>
+</div>
+
+<div class="button-container">
+    <button class="btn-info" onclick="$('#mybook').booklet('prev')">Página Anterior</button>
+    <button class="btn-info" onclick="$('#mybook').booklet('next')">Página Siguiente</button>
+    <button class="btn-hospital" onclick="window.location.href='https://www.hospitalpagina.com'">Página del Hospital</button>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="booklet/jquery-2.1.0.min.js"><\/script>');</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="booklet/jquery.easing.1.3.js"></script>
+<script src="booklet/jquery.booklet.latest.min.js"></script>
+<script src="script.js"></script>
+
 </body>
 </html>
