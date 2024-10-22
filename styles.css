@@ -1,14 +1,19 @@
-/* Estilos encapsulados para evitar conflictos con Bootstrap */
-#booklet-container {
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+#book-container {
     max-width: 900px;
     margin: auto;
     border: 1px solid #ddd;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
+    overflow: hidden;
     padding: 20px;
 }
 
-/* Estilos del botón del hospital */
 .btn-hospital {
     background-color: #28a745;
     border: none;
