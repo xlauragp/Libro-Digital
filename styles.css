@@ -12,8 +12,23 @@
     margin-top: 20px;
 }
 
-/* Estilo de botones */
-.btn-hospital, .btn-download {
+.btn-hospital {
+    background-color: #28a745;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+.btn-hospital:hover {
+    background-color: #218838;
+}
+
+/* Botón del hospital */
+.btn-hospital {
     background: linear-gradient(90deg, #28a745, #218838);
     color: white;
     border: none;
@@ -22,11 +37,27 @@
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: background 0.3s ease, transform 0.2s ease;
-    margin: 10px;
 }
 
-.btn-hospital:hover, .btn-download:hover {
+.btn-hospital:hover {
     background: linear-gradient(90deg, #218838, #1e7e34);
+    transform: scale(1.05);
+}
+
+/* Botón para descargar PDF */
+.btn-download {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-download:hover {
+    background: linear-gradient(90deg, #0056b3, #004085);
     transform: scale(1.05);
 }
 
