@@ -4,33 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Libro Digital - Buena Alimentación para su Bebé</title>
+    <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- PDF.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
-<body>
-    <div class="container text-center">
-        <canvas id="pdf-render" class="my-5"></canvas>
-
-        <div class="btn-group mb-2" role="group" aria-label="Navegación de páginas">
-            <button id="prev-page" class="btn btn-primary">Página Anterior</button>
-            <button id="next-page" class="btn btn-primary">Página Siguiente</button>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div id="pdf-container" class="d-flex justify-content-center mb-4">
+            <canvas id="pdf-render" class="border"></canvas>
         </div>
-        <div class="mb-4">
+
+        <div class="d-flex justify-content-center mb-3">
+            <button id="prev-page" class="btn btn-primary mx-2">Página Anterior</button>
+            <button id="next-page" class="btn btn-primary mx-2">Página Siguiente</button>
+        </div>
+        
+        <div class="text-center mb-3">
             Página <span id="page-num">1</span> de <span id="page-count">...</span>
         </div>
-        <div class="mb-5">
+
+        <div class="d-flex justify-content-center">
             <button id="hospital-page" class="btn btn-info">Página del Hospital</button>
         </div>
     </div>
 
-    <script src="script.js" defer></script>
+    <!-- Script for PDF.js -->
+    <script src="script.js"></script>
     <script>
         document.getElementById('hospital-page').addEventListener('click', () => {
             window.open('https://hospitalinfantil.org/', '_blank');
         });
     </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
