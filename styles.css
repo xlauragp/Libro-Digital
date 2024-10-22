@@ -1,51 +1,47 @@
 body {
+    background-color: #f8f9fa;
     font-family: Arial, sans-serif;
-}
-
-#book-container {
-    margin: auto;
-    max-width: 800px;
 }
 
 #flipbook {
     width: 800px;
-    height: 500px;
+    height: 600px;
     margin: auto;
+    position: relative;
 }
 
-.page {
-    background: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+.page img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-button {
-    padding: 10px 20px;
-    font-size: 1rem;
+#book-container {
+    position: relative;
+    overflow: hidden;
 }
 
-#hospital-page {
+#highlight-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.btn-info {
     background-color: #17a2b8;
+    border: none;
     color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
 }
 
-#hospital-page:hover {
+.btn-info:hover {
     background-color: #138496;
-    color: white;
-}
-
-.btn-group, #hospital-page {
-    margin-bottom: 20px;
-}
-
-/* Media Queries for Mobile Responsiveness */
-@media (max-width: 768px) {
-    #flipbook {
-        width: 100%;
-        height: auto;
-    }
-    .page {
-        width: 90%;
-        margin-bottom: 20px;
-    }
 }
