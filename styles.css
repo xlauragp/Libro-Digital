@@ -67,3 +67,29 @@
     margin-top: 20px;
 }
 
+/* Estilos del selector de capítulos */
+.chapter-select {
+    border: 2px solid #28a745;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+}
+
+.chapter-select:focus {
+    border-color: #218838;
+}
+
+/* Centrado en el contenedor */
+.container-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Estilos de los botones */
+.btn {
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 8px;
+}
+
