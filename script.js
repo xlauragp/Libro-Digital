@@ -1,10 +1,10 @@
-$(document).ready(function () {
-    // Inicializa el booklet para crear el efecto de libro
+$(function() {
     $('#mybook').booklet({
         width: 800,
         height: 500,
-        autoCenter: true,
+        pagePadding: 0,
         pageNumbers: true,
-        arrows: false
+        manual: true,
+        overlays: true
     });
 });
