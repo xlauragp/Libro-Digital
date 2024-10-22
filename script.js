@@ -1,50 +1,80 @@
-let currentPage = 1;
+const url = './libro.pdf';
 
-function showPage(pageNumber) {
-    const pages = document.querySelectorAll('.page');
-    pages.forEach((page, index) => {
-        page.classList.remove('active');
-        if (index + 1 === pageNumber) {
-            page.classList.add('active');
-        }
+let pdfDoc = null,
+    pageNum = 1,
+    pageIsRendering = false,
+    pageNumIsPending = null;
+
+const scale = 1.5,
+      canvas = document.createElement('canvas'),
+      ctx = canvas.getContext('2d');
+
+document.getElementById('pdf-render').appendChild(canvas);
+
+// Render the page
+const renderPage = num => {
+    pageIsRendering = true;
+
+    // Get page
+    pdfDoc.getPage(num).then(page => {
+        const viewport = page.getViewport({ scale });
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        const renderCtx = {
+            canvasContext: ctx,
+            viewport
+        };
+
+        page.render(renderCtx).promise.then(() => {
+            pageIsRendering = false;
+
+            if (pageNumIsPending !== null) {
+                renderPage(pageNumIsPending);
+                pageNumIsPending = null;
+            }
+        });
+
+        // Output current page
+        document.getElementById('page-num').textContent = num;
     });
-}
+};
 
-function nextPage() {
-    const pages = document.querySelectorAll('.page');
-    if (currentPage < pages.length) {
-        currentPage++;
-        showPage(currentPage);
+// Check for pages rendering
+const queueRenderPage = num => {
+    if (pageIsRendering) {
+        pageNumIsPending = num;
+    } else {
+        renderPage(num);
     }
-}
+};
 
-function previousPage() {
-    if (currentPage > 1) {
-        currentPage--;
-        showPage(currentPage);
+// Show Prev Page
+const showPrevPage = () => {
+    if (pageNum <= 1) {
+        return;
     }
-}
+    pageNum--;
+    queueRenderPage(pageNum);
+};
 
-// Mostrar la primera página al cargar
-showPage(currentPage);
-
-// Subrayar el texto seleccionado
-document.addEventListener('mouseup', function () {
-    const selection = window.getSelection();
-    if (selection.toString().length > 0) {
-        const range = selection.getRangeAt(0);
-        const span = document.createElement('span');
-        span.style.backgroundColor = 'yellow';
-        span.appendChild(range.extractContents());
-        range.insertNode(span);
+// Show Next Page
+const showNextPage = () => {
+    if (pageNum >= pdfDoc.numPages) {
+        return;
     }
+    pageNum++;
+    queueRenderPage(pageNum);
+};
+
+// Get Document
+pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
+    pdfDoc = pdfDoc_;
+    document.getElementById('page-count').textContent = pdfDoc.numPages;
+
+    renderPage(pageNum);
 });
 
-// Inicializar el efecto de pasar página
-$(document).ready(function() {
-    $('#flipbook').turn({
-        width: 800,
-        height: 600,
-        autoCenter: true
-    });
-});
+// Button Events
+document.getElementById('prev-page').addEventListener('click', showPrevPage);
+document.getElementById('next-page').addEventListener('click', showNextPage);
