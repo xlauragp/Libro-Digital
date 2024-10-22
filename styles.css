@@ -1,10 +1,15 @@
-/* Estilos para que todas las imágenes tengan un tamaño uniforme */
+/* Estilos generales */
 #mybook img {
-    width: auto; /* Cambiar a 'auto' para que el navegador ajuste el ancho */
-    height: auto; /* Mantener la proporción correcta */
-    max-width: 100%; /* Limitar el ancho máximo */
-    max-height: 100%; /* Limitar el alto máximo */
-    object-fit: contain; /* Mantener la proporción de las imágenes */
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.container-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 }
 
 .btn-hospital {
@@ -55,25 +60,6 @@
     background: linear-gradient(90deg, #0056b3, #004085);
     transform: scale(1.05);
 }
-
-/* Centrado en el contenedor */
-.container-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.container {
-    max-width: 100%;
-}
-
-.btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 10px;
-}
-
 /* Estilos del selector de capítulos */
 .chapter-select {
     border: 2px solid #336699;
