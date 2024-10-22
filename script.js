@@ -38,3 +38,4 @@ document.addEventListener('mouseup', function () {
         range.insertNode(span);
     }
 });
+
