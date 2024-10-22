@@ -1,29 +1,29 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;
+    text-align: center;
 }
 
 #book-container {
-    max-width: 900px;
+    max-width: 600px;
     margin: auto;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-    overflow: hidden;
+    padding: 20px;
+}
+
+#mybook {
+    width: 100%;
+    height: 400px;
 }
 
 .btn-hospital {
     background-color: #28a745;
-    border: none;
     color: white;
     padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
+    border: none;
     border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
 }
 
 .btn-hospital:hover {
