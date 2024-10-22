@@ -69,10 +69,7 @@ const renderPages = num => {
                 pageDiv.className = 'page';
                 pageDiv.appendChild(canvas);
 
-                // Verificar que la página se pueda agregar
-                if ($('#flipbook').turn('pages') < num + i) {
-                    $('#flipbook').turn('addPage', pageDiv, num + i);
-                }
+                $('#flipbook').turn('addPage', pageDiv);
             }).catch(err => {
                 console.error('Error rendering page:', err);
             });
