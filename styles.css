@@ -56,12 +56,7 @@
 }
 
 
-/* Asegura que las imágenes se ajusten al tamaño del contenedor */
-#mybook img {
-    max-width: 100%;
-    height: auto;
-    object-fit: cover;
-}
+
 
 .container {
     max-width: 100%;
