@@ -12,12 +12,12 @@ pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
     totalPages = pdfDoc.numPages;
     document.getElementById('page-count').textContent = totalPages;
 
-    // Initialize Turn.js with empty pages
+    // Initialize Turn.js with only two pages (previous and next)
     $('#flipbook').turn({
         width: 800,
         height: 600,
         autoCenter: true,
-        pages: totalPages
+        pages: 2
     });
 
     // Render the first page
@@ -52,7 +52,7 @@ const renderPage = num => {
                 $('#flipbook').turn('removePage', num);
             }
 
-            $('#flipbook').turn('addPage', pageDiv, num);
+            $('#flipbook').turn('addPage', pageDiv, 1);
         }).catch(err => {
             console.error('Error rendering page:', err);
         });
@@ -65,7 +65,7 @@ const renderPage = num => {
 document.getElementById('prev-page').addEventListener('click', () => {
     if (currentPage > 1) {
         currentPage--;
-        $('#flipbook').turn('page', currentPage);
+        $('#flipbook').turn('page', 1);
         renderPage(currentPage);
         document.getElementById('page-num').textContent = currentPage;
     }
@@ -74,7 +74,7 @@ document.getElementById('prev-page').addEventListener('click', () => {
 document.getElementById('next-page').addEventListener('click', () => {
     if (currentPage < totalPages) {
         currentPage++;
-        $('#flipbook').turn('page', currentPage);
+        $('#flipbook').turn('page', 1);
         renderPage(currentPage);
         document.getElementById('page-num').textContent = currentPage;
     }
