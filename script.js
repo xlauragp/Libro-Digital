@@ -1,7 +1,7 @@
 $(function() {
     $('#mybook').booklet({
-        width: 800,
-        height: 600,
+        width: '100%',
+        height: 500,
         auto: false,
         closed: true,
         covers: true,
