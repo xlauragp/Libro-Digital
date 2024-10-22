@@ -1,15 +1,8 @@
-/* Estilos generales */
+/* Estilos para que todas las imágenes tengan un tamaño uniforme */
 #mybook img {
     max-width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-.container-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
+    max-height: 100%;
+    object-fit: contain; /* Mantener la proporción de las imágenes */
 }
 
 .btn-hospital {
@@ -59,6 +52,31 @@
 .btn-download:hover {
     background: linear-gradient(90deg, #0056b3, #004085);
     transform: scale(1.05);
+}
+
+/* Centrado en el contenedor */
+.container-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Asegura que las imágenes se ajusten al tamaño del contenedor */
+#mybook img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.container {
+    max-width: 100%;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
 }
 
 /* Media query para pantallas más pequeñas */
