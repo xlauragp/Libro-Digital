@@ -1,34 +1,30 @@
 body {
-    font-family: 'Georgia', serif;
-    background-color: #f8f8f8;
-    color: #333;
+    font-family: Arial, sans-serif;
 }
 
-#pdf-render {
-    margin: 0 auto;
-    max-width: 800px;
+#pdf-container {
+    width: 80%;
+    height: auto;
+    margin: auto;
+}
+
+canvas {
+    width: 100%;
     border: 1px solid #ccc;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 button {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-button:hover {
-    background-color: #005f6b;
+    padding: 10px 20px;
+    font-size: 1rem;
 }
 
 #hospital-page {
     background-color: #17a2b8;
-    color: #fff;
+    color: white;
 }
 
 #hospital-page:hover {
     background-color: #138496;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-.btn-group, #hospital-page {
-    margin-bottom: 20px;
+    color: white;
 }
