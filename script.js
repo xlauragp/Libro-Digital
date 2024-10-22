@@ -12,15 +12,19 @@ pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
     pdfDoc = pdfDoc_;
     document.getElementById('page-count').textContent = pdfDoc.numPages;
 
+    // Render each page
+    const renderPromises = [];
     for (let num = 1; num <= pdfDoc.numPages; num++) {
-        renderPage(num);
+        renderPromises.push(renderPage(num));
     }
 
-    // Inicializar Turn.js después de agregar todas las páginas
-    $('#flipbook').turn({
-        width: 800,
-        height: 600,
-        autoCenter: true
+    // Wait for all pages to be rendered before initializing Turn.js
+    Promise.all(renderPromises).then(() => {
+        $('#flipbook').turn({
+            width: 800,
+            height: 600,
+            autoCenter: true
+        });
     });
 }).catch(err => {
     console.error('Error loading PDF:', err);
@@ -29,39 +33,34 @@ pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
 
 // Render the page
 const renderPage = num => {
-    pageIsRendering = true;
+    return new Promise((resolve, reject) => {
+        pdfDoc.getPage(num).then(page => {
+            const viewport = page.getViewport({ scale });
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
 
-    // Get page
-    pdfDoc.getPage(num).then(page => {
-        const viewport = page.getViewport({ scale });
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
+            const renderCtx = {
+                canvasContext: ctx,
+                viewport
+            };
 
-        const renderCtx = {
-            canvasContext: ctx,
-            viewport
-        };
-
-        page.render(renderCtx).promise.then(() => {
-            pageIsRendering = false;
-
-            if (pageNumIsPending !== null) {
-                renderPage(pageNumIsPending);
-                pageNumIsPending = null;
-            }
+            page.render(renderCtx).promise.then(() => {
+                // Añadir la página al flipbook
+                const pageDiv = document.createElement('div');
+                pageDiv.className = 'page';
+                pageDiv.appendChild(canvas);
+                document.getElementById('flipbook').appendChild(pageDiv);
+                resolve();
+            }).catch(err => {
+                console.error('Error rendering page:', err);
+                reject(err);
+            });
         }).catch(err => {
-            console.error('Error rendering page:', err);
+            console.error('Error getting page:', err);
+            reject(err);
         });
-
-        // Añadir la página al flipbook
-        const pageDiv = document.createElement('div');
-        pageDiv.className = 'page';
-        pageDiv.appendChild(canvas);
-        document.getElementById('flipbook').appendChild(pageDiv);
-    }).catch(err => {
-        console.error('Error getting page:', err);
     });
 };
 
