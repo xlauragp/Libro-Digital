@@ -28,7 +28,7 @@ pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
         display: 'double'
     });
 
-    // Render the first page (cover)
+    // Render the first two pages (cover and next)
     renderPages(currentPage);
 }).catch(err => {
     console.error('Error loading PDF:', err);
@@ -69,7 +69,10 @@ const renderPages = num => {
                 pageDiv.className = 'page';
                 pageDiv.appendChild(canvas);
 
-                $('#flipbook').turn('addPage', pageDiv, num + i);
+                // Verificar que la página se pueda agregar
+                if ($('#flipbook').turn('pages') < num + i) {
+                    $('#flipbook').turn('addPage', pageDiv, num + i);
+                }
             }).catch(err => {
                 console.error('Error rendering page:', err);
             });
