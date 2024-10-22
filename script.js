@@ -8,3 +8,4 @@ $(function() {
         pagePadding: 10
     });
 });
+
