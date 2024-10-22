@@ -28,6 +28,7 @@ function previousPage() {
 // Mostrar la primera página al cargar
 showPage(currentPage);
 
+// Subrayar el texto seleccionado
 document.addEventListener('mouseup', function () {
     const selection = window.getSelection();
     if (selection.toString().length > 0) {
@@ -39,3 +40,11 @@ document.addEventListener('mouseup', function () {
     }
 });
 
+// Inicializar el efecto de pasar página
+$(document).ready(function() {
+    $('#flipbook').turn({
+        width: 800,
+        height: 600,
+        autoCenter: true
+    });
+});
