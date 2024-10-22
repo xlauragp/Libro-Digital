@@ -1,13 +1,14 @@
-#mybook {
-    width: 100%;
+#mybook img {
+    max-width: 100%;
     height: auto;
-    max-height: 90vh; /* Limita el alto al 90% de la pantalla, pero permite que se ajuste */
+    object-fit: cover;
 }
 
-
-#mybook img {
-    width: 100%;
-    height: 100%;
+.container-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 }
 
 .btn-hospital {
