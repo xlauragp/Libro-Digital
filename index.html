@@ -17,9 +17,10 @@
 <body class="bg-light">
     <div class="container mt-5">
         <div id="book-container" class="bg-white p-4 rounded shadow-lg">
-            <div id="pdf-container" class="d-flex flex-wrap justify-content-center mb-4">
-                <canvas id="pdf-render-left" class="border m-2"></canvas>
-                <canvas id="pdf-render-right" class="border m-2"></canvas>
+            <div id="flipbook" class="d-flex flex-wrap justify-content-center mb-4">
+                <div class="hard">Portada</div>
+                <div class="page" id="pdf-render-left"></div>
+                <div class="page" id="pdf-render-right"></div>
             </div>
 
             <div class="d-flex justify-content-center mb-3">
