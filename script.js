@@ -11,6 +11,6 @@ $(function() {
 
     // Button for the hospital page link
     $('#hospital-btn').on('click', function() {
-        window.location.href = 'https://www.hospitalexample.com';
+        window.location.href = 'https://hospitalinfantil.org/';
     });
 });
