@@ -6,7 +6,7 @@ body {
 
 #flipbook-container {
     margin: 0 auto;
-    width: 800px;
+    max-width: 800px;
     height: 600px;
     border: 1px solid #ccc;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -16,6 +16,7 @@ body {
 #flipbook {
     width: 100%;
     height: 100%;
+    background-color: white;
 }
 
 .page {
