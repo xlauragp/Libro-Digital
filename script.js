@@ -1,10 +1,13 @@
-$(function() {
+$(document).ready(function () {
+    // Inicializa el booklet para crear el efecto de libro
     $('#mybook').booklet({
-        width: 500,
-        height: 400,
-        auto: false,
-        pageNumbers: true
+        width: 800,
+        height: 500,
+        autoCenter: true,
+        pageNumbers: true,
+        arrows: false
     });
+});
 
     $('#hospital-page').click(function() {
         window.open('https://hospitalinfantil.org/', '_blank');
