@@ -93,3 +93,8 @@
     border-radius: 8px;
 }
 
+.hard {
+    background-color: #336699; /* Un tono de azul similar al de la imagen */
+    color: white; /* El color del texto en la portada */
+    border: none;
+}
