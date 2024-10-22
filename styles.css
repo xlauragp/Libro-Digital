@@ -7,20 +7,16 @@ body {
     max-width: 800px;
 }
 
-#pdf-container {
-    width: 100%;
-    height: auto;
+#flipbook {
+    width: 800px;
+    height: 500px;
     margin: auto;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
 }
 
-canvas {
-    width: 48%;
-    height: auto;
-    border: 1px solid #ccc;
+.page {
+    background: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
 
 button {
@@ -44,10 +40,11 @@ button {
 
 /* Media Queries for Mobile Responsiveness */
 @media (max-width: 768px) {
-    #pdf-container {
-        flex-direction: column;
+    #flipbook {
+        width: 100%;
+        height: auto;
     }
-    canvas {
+    .page {
         width: 90%;
         margin-bottom: 20px;
     }
