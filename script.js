@@ -1,3 +1,4 @@
+<!-- Archivo: script.js -->
 const url = './libro.pdf';
 
 let pdfDoc = null,
