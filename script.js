@@ -16,7 +16,8 @@ pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
         $('#flipbook').turn({
             width: 800,
             height: 600,
-            autoCenter: true
+            autoCenter: true,
+            pages: pdfDoc.numPages
         });
     });
 }).catch(err => {
@@ -53,7 +54,7 @@ const renderPage = num => {
                 const pageDiv = document.createElement('div');
                 pageDiv.className = 'page';
                 pageDiv.appendChild(canvas);
-                document.getElementById('flipbook').appendChild(pageDiv);
+                $('#flipbook').turn('addPage', pageDiv, num);
                 resolve();
             }).catch(err => {
                 console.error('Error rendering page:', err);
