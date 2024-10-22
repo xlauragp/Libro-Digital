@@ -1,37 +1,20 @@
-$(document).ready(function () {
-    $('#flipbook').turn({
-        width: 800,
-        height: 600,
-        autoCenter: true,
-        display: 'double',
-        elevation: 50,
-        gradients: true,
-        when: {
-            turned: function (e, page) {
-                console.log('Current view: ', $(this).turn('view'));
-            }
+// script.js
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Highlight selected text functionality
+    document.addEventListener('mouseup', function() {
+        const selection = window.getSelection();
+        if (selection.toString().length > 0) {
+            const range = selection.getRangeAt(0);
+            const span = document.createElement('span');
+            span.style.backgroundColor = 'yellow';
+            span.appendChild(range.extractContents());
+            range.insertNode(span);
         }
     });
 
+    // Open hospital page in a new tab
     document.getElementById('hospital-page').addEventListener('click', () => {
         window.open('https://hospitalinfantil.org/', '_blank');
-    });
-
-    // Inicialización del canvas de resaltado
-    const canvas = new fabric.Canvas('highlight-canvas', {
-        isDrawingMode: true,
-        backgroundColor: 'rgba(0,0,0,0)',
-    });
-
-    canvas.setHeight(document.getElementById('flipbook').clientHeight);
-    canvas.setWidth(document.getElementById('flipbook').clientWidth);
-
-    canvas.freeDrawingBrush.width = 5;
-    canvas.freeDrawingBrush.color = 'yellow';
-
-    // Redimensionar el canvas cuando se cambia el tamaño del libro
-    $(window).resize(function () {
-        canvas.setHeight(document.getElementById('flipbook').clientHeight);
-        canvas.setWidth(document.getElementById('flipbook').clientWidth);
     });
 });
