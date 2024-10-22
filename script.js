@@ -1,96 +1,37 @@
-const url = './libro.pdf';
-let pdfDoc = null,
-    pageNum = 1,
-    pageIsRendering = false,
-    pageNumIsPending = null;
-
-const scale = 1.5,
-    canvasLeft = document.querySelector('#pdf-render-left'),
-    canvasRight = document.querySelector('#pdf-render-right');
-
-// Cargar el documento PDF
-pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
-    pdfDoc = pdfDoc_;
-    document.querySelector('#page-count').textContent = pdfDoc.numPages;
-    renderPage(pageNum);
-});
-
-// Renderizar las páginas
-function renderPage(num) {
-    pageIsRendering = true;
-
-    // Renderizar página izquierda
-    pdfDoc.getPage(num).then(page => {
-        const viewport = page.getViewport({ scale });
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
-
-        const renderCtx = {
-            canvasContext: ctx,
-            viewport
-        };
-
-        page.render(renderCtx).promise.then(() => {
-            pageIsRendering = false;
-
-            if (pageNumIsPending !== null) {
-                renderPage(pageNumIsPending);
-                pageNumIsPending = null;
+$(document).ready(function () {
+    $('#flipbook').turn({
+        width: 800,
+        height: 600,
+        autoCenter: true,
+        display: 'double',
+        elevation: 50,
+        gradients: true,
+        when: {
+            turned: function (e, page) {
+                console.log('Current view: ', $(this).turn('view'));
             }
-        });
-
-        if (num % 2 === 0) {
-            canvasRight.innerHTML = '';
-            canvasRight.appendChild(canvas);
-        } else {
-            canvasLeft.innerHTML = '';
-            canvasLeft.appendChild(canvas);
         }
     });
 
-    document.querySelector('#page-num').textContent = num;
-}
+    document.getElementById('hospital-page').addEventListener('click', () => {
+        window.open('https://hospitalinfantil.org/', '_blank');
+    });
 
-// Colocar en cola la página para renderizar
-function queueRenderPage(num) {
-    if (pageIsRendering) {
-        pageNumIsPending = num;
-    } else {
-        renderPage(num);
-    }
-}
+    // Inicialización del canvas de resaltado
+    const canvas = new fabric.Canvas('highlight-canvas', {
+        isDrawingMode: true,
+        backgroundColor: 'rgba(0,0,0,0)',
+    });
 
-// Mostrar página anterior
-function previousPage() {
-    if (pageNum <= 1) {
-        return;
-    }
-    pageNum -= 2;
-    if (pageNum < 1) pageNum = 1;
-    queueRenderPage(pageNum);
-}
+    canvas.setHeight(document.getElementById('flipbook').clientHeight);
+    canvas.setWidth(document.getElementById('flipbook').clientWidth);
 
-// Mostrar página siguiente
-function nextPage() {
-    if (pageNum + 1 >= pdfDoc.numPages) {
-        return;
-    }
-    pageNum += 2;
-    queueRenderPage(pageNum);
-}
+    canvas.freeDrawingBrush.width = 5;
+    canvas.freeDrawingBrush.color = 'yellow';
 
-// Añadir manejadores de eventos para los botones de navegación
-document.getElementById('prev-page').addEventListener('click', previousPage);
-document.getElementById('next-page').addEventListener('click', nextPage);
-
-// Inicializar el efecto de pase de página con turn.js
-$(document).ready(function() {
-    $('#flipbook').turn({
-        width: 800,
-        height: 500,
-        autoCenter: true
+    // Redimensionar el canvas cuando se cambia el tamaño del libro
+    $(window).resize(function () {
+        canvas.setHeight(document.getElementById('flipbook').clientHeight);
+        canvas.setWidth(document.getElementById('flipbook').clientWidth);
     });
 });
