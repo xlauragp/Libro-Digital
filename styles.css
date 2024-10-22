@@ -1,41 +1,20 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    text-align: center;
-}
-
-#book-container {
+/* Estilos encapsulados para evitar conflictos con Bootstrap */
+#booklet-container {
     max-width: 900px;
     margin: auto;
     border: 1px solid #ddd;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
-    overflow: hidden;
     padding: 20px;
 }
 
-.btn-info {
-    background-color: #17a2b8;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.btn-info:hover {
-    background-color: #138496;
-}
-
+/* Estilos del botón del hospital */
 .btn-hospital {
     background-color: #28a745;
     border: none;
     color: white;
     padding: 10px 20px;
     font-size: 16px;
-    margin: 4px 2px;
     cursor: pointer;
     border-radius: 5px;
 }
