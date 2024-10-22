@@ -80,19 +80,30 @@
 }
 
 
-/* Media query para pantallas más pequeñas */
+/* Botón para pantallas pequeñas */
 @media (max-width: 768px) {
     #mybook {
         width: 100%;
         height: auto;
     }
 
+    /* Botones más pequeños en pantallas pequeñas */
     .btn-hospital, .btn-download {
-        font-size: 16px;
-        padding: 10px 20px;
+        font-size: 14px; /* Reduce el tamaño de la fuente */
+        padding: 8px 15px; /* Reduce el tamaño del padding */
     }
-    
+
+    /* Ajustar el contenedor en pantallas pequeñas */
     .container {
-        margin-top: 20px;
+        margin-top: 10px; /* Reduce el margen superior */
+        padding: 0 10px;  /* Añade un padding lateral para que no quede pegado al borde */
+    }
+
+    /* Centrar los botones en pantallas pequeñas */
+    .container-center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
+
