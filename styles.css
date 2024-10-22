@@ -55,13 +55,6 @@
     transform: scale(1.05);
 }
 
-/* Centrado en el contenedor */
-.container-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
 
 /* Asegura que las imágenes se ajusten al tamaño del contenedor */
 #mybook img {
