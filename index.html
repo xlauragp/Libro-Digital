@@ -44,6 +44,7 @@
                 <div class="page"><img src="paginas/img3.jpg" alt="Página 3"></div>
                 <div class="page"><img src="paginas/img4.jpg" alt="Página 4"></div>
                 <!-- Continúa con todas las imágenes necesarias -->
+                <div class="hard">Contraportada</div>
             </div>
             <canvas id="highlight-canvas"></canvas>
         </div>
@@ -74,25 +75,32 @@
         document.getElementById('hospital-page').addEventListener('click', () => {
             window.open('https://hospitalinfantil.org/', '_blank');
         });
-    </script>
 
-    <!-- Script para el resaltado -->
-    <script>
+        // Redimensionar el canvas cuando se cambia el tamaño del libro
+        function resizeCanvas() {
+            const flipbook = document.getElementById('flipbook');
+            canvas.setHeight(flipbook.clientHeight);
+            canvas.setWidth(flipbook.clientWidth);
+            $('#highlight-canvas').css({
+                width: flipbook.clientWidth,
+                height: flipbook.clientHeight
+            });
+        }
+
+        // Script para el resaltado
         const canvas = new fabric.Canvas('highlight-canvas', {
             isDrawingMode: true,
             backgroundColor: 'rgba(0,0,0,0)',
         });
 
-        canvas.setHeight(document.getElementById('flipbook').clientHeight);
-        canvas.setWidth(document.getElementById('flipbook').clientWidth);
+        resizeCanvas();
 
         canvas.freeDrawingBrush.width = 5;
         canvas.freeDrawingBrush.color = 'yellow';
 
         // Redimensionar el canvas cuando se cambia el tamaño del libro
         $(window).resize(function() {
-            canvas.setHeight(document.getElementById('flipbook').clientHeight);
-            canvas.setWidth(document.getElementById('flipbook').clientWidth);
+            resizeCanvas();
         });
     </script>
 
