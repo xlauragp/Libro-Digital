@@ -1,16 +1,11 @@
-$(function() {
-    // Initialize the booklet
+$(document).ready(function() {
     $('#mybook').booklet({
         width: 800,
         height: 500,
         autoCenter: true,
         pageNumbers: true,
-        next: '#next',
-        prev: '#prev'
-    });
-
-    // Button for the hospital page link
-    $('#hospital-btn').on('click', function() {
-        window.location.href = 'https://hospitalinfantil.org/';
+        arrows: true,
+        closed: true,
+        covers: true
     });
 });
