@@ -1,10 +1,16 @@
 $(function() {
+    // Initialize the booklet
     $('#mybook').booklet({
         width: 800,
         height: 500,
-        pagePadding: 0,
+        autoCenter: true,
         pageNumbers: true,
-        manual: true,
-        overlays: true
+        next: '#next',
+        prev: '#prev'
+    });
+
+    // Button for the hospital page link
+    $('#hospital-btn').on('click', function() {
+        window.location.href = 'https://www.hospitalexample.com';
     });
 });
