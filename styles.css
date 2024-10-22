@@ -1,5 +1,9 @@
 /* Estilos para que todas las imágenes tengan un tamaño uniforme */
-
+#mybook img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Mantener la proporción de las imágenes */
+}
 
 .btn-hospital {
     background-color: #28a745;
@@ -56,13 +60,6 @@
     justify-content: center;
     align-items: center;
     margin-top: 20px;
-}
-
-/* Asegura que las imágenes se ajusten al tamaño del contenedor */
-#mybook img {
-    max-width: 100%;
-    height: auto;
-    object-fit: cover;
 }
 
 .container {
